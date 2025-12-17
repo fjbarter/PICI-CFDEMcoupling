@@ -1,86 +1,85 @@
-<div align ="center">
+# UoB Positron Imaging Centre-Improved CFDEMcoupling
 
-<p float="left">
-  <img src="doc/cfdem_logo.jpg" width="300" />
-  <img src="doc/cfdem_logo2.png" width="300" /> 
-</p>
-  
-</div>
+This repository is a fork of [**CFDEMcoupling-PUBLIC**](https://github.com/CFDEMproject/CFDEMcoupling-PUBLIC) with additions for an immersed boundary (IB) / fully-resolved CFD–DEM workflow.
 
-## The extended version of CFDEM®coupling is constantly developed and maintained by DCS Computing GmbH - you can find more information [here](https://www.aspherix-dem.com/software/cfdemcoupling-functionalities/)
+**Contact:**
 
-This repository contains older, publicly available versions of CFDEM®coupling (referred to as "CFDEM®coupling-PUBLIC").
-This repository has last been updated for CFDEMcoupling-PUBLIC to be compatible with OpenFOAM-6 ensuring
-functionality on Ubuntu 22.04 and 24.04.
-While this update contains some bugfixes and improvements, the main intention of this
-update is keeping CFDEMcoupling usable also on newer systems where the compilation of
-older OpenFOAM versions may prove difficult.
-This repository will not be updated in the foreseeable future.
+General queries: [fjbarter@outlook.com](mailto:fjbarter@outlook.com)
 
-CFDEM®coupling-PUBLIC is compatible with [LIGGGHTS-PUBLIC](https://github.com/CFDEMproject/LIGGGHTS-PUBLIC).
+Specific implementation of the improved immersed-boundary method: [chehanqiao@outlook.com](mailto:chehanqiao@outlook.com)
 
-The extended version of CFDEM®coupling is compatible with the DEM software [Aspherix®](https://www.aspherix-dem.com/), the "successor" of LIGGGHTS® developed and distributed by DCS Computing GmbH, Linz, Austria.
+## About this fork
 
-</div>
+This fork adds an improved fully resolved CFD–DEM / immersed boundary capability based on the CFDEM framework and the approach described by Zhang (2018) (see References).
 
-## CFDEM®coupling-PUBLIC
+### Additions in this fork
 
-CFDEM®coupling-PUBLIC is an Open Source coupled CFD-DEM framework combining the strengths of LIGGGHTS® DEM code and the Open Source CFD package OpenFOAM® [^1]. CFDEM®coupling stands for Computational Fluid Dynamics (CFD) - Discrete Element Method (DEM) coupling.
+**New submodels**
+- **Force model**
+  - `ReactionIB` – fluid–particle interaction force based on the momentum source term (alternative to `ShirgaonkarIB`)
+- **Voidfraction models**
+  - `IBVoidFractionKempe`
+  - `IBVoidFractionSDF`
 
-LIGGGHTS® and CFDEM® are registered trade marks of DCS Computing GmbH, the producer of the LIGGGHTS® software and the CFDEM®coupling software; see http://www.cfdem.com/terms-trademark-policy for details.
+**Solver**
+- `cfdemSolverIBPICI`
 
-CFDEM®coupling-PUBLIC  is open-source, distributed under the terms of the GNU Public License, version 3 or later. CFDEM®coupling-PUBLIC is part of CFDEM®project: www.liggghts.com | www.cfdem.com. Core developer and main author: Christoph Goniva, christoph.goniva@dcs-computing.com
+**Tutorials / examples**
+- Flow through ordered packings validation case in `./tutorials/` (SC, BCC, FCC) with comparison against analytical data (Zick & Homsy).
 
-[^1]: This offering is not approved or endorsed by OpenCFD Limited, the producer of the OpenFOAM software and owner of the OPENFOAM® and OpenCFD® trade marks.
+## Compatibility
 
-</div>
+This fork is based on the **OpenFOAM-6 compatible** CFDEMcoupling-PUBLIC codebase.
 
-## Features
+- Tested with: **OpenFOAM 6**
+- OS: **Ubuntu 24.04, RedHatEnterprise 8.10**
 
-* Modular approach that allows users to easily implement new models
-* MPI parallelization that enables to use it for large scale problems
-* The "forum" (www.cfdem.com) on CFD-DEM gives the possibility to exchange with other users / developers
-* The use of GIT allows to easily update to the latest version
-* Basic documentation is provided
+PICI-CFDEMcoupling is compatible with [PICI-LIGGGHTS](https://github.com/uob-positron-imaging-centre/PICI-LIGGGHTS) and also backwards-compatible with LIGGGHTS-PUBLIC.
 
-In this toolbox the particle representation within the CFD solver is organized by "cloud" classes. Key functionalities are organised in sub-models (e.g. force models, data exchange models, etc.), which can easily be selected and combined by dictionary settings.
+## Installation
 
-</div>
+Installation follows CFDEMcoupling-PUBLIC. Refer to [www.cfdem.com](www.cfdem.com) for the general procedure, then build this fork’s solvers/libraries using the usual CFDEM build scripts (e.g. `cfdemCompCFDEM`, depending on your environment).
 
-## Structure
-The CFDEM®coupling-PUBLIC distribution includes the following files and directories:
+## Upstream project: CFDEMcoupling-PUBLIC
 
-* `README`: this file
-* `COPYING`: the GNU General Public License (GPL) file
-* `DISCLAIMER`
-* `src`: directory including the source files of the coupling toolbox and models
-* `applications`: directory including the solver files for coupled CFD-DEM simulations
-* `doc`: directory including the documentation of CFDEM®coupling
-* `tutorials`: directory including basic tutorial cases showing the functionality
+CFDEMcoupling-PUBLIC is an Open Source coupled CFD-DEM framework combining the strengths of LIGGGHTS® DEM code and the Open Source CFD package OpenFOAM® [^1]. CFDEMcoupling stands for Computational Fluid Dynamics (CFD) - Discrete Element Method (DEM) coupling.
 
-Details on installation are given on the www.cfdem.com website.
+CFDEMcoupling-PUBLIC is compatible with [LIGGGHTS-PUBLIC](https://github.com/CFDEMproject/LIGGGHTS-PUBLIC).
 
-</div>
 
-## License
+### Trademarks / disclaimer
 
-CFDEM®coupling-PUBLIC is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+LIGGGHTS® and CFDEM® are registered trade marks of DCS Computing GmbH. Some parts of CFDEMcoupling are based on OpenFOAM®.
 
-CFDEM®coupling is distributed in the hope that it will be useful, but **without any warranty**; without even the implied warranty of **merchantabiity** or **fitness for a particular purpouse**; see the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with CFDEM®coupling-PUBLIC; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+## Licence
 
-</div>
+PICI-CFDEMcoupling is open-source, distributed under the terms of the GNU General Public License v3 or later.
 
-## Copyrights
-* Copyright 2012-now: DCS Computing GmbH, Linz
-* Copyright 2009-2015: JKU Linz
+## How to cite
 
-Some parts of CFDEM®coupling are based on OpenFOAM® and Copyright on these parts is held by the OpenFOAM® Foundation (www.openFoam.org) and potentially other parties. Some parts of CFDEMcoupling are contributied by other parties, which are holding the Copyright. This is listed in each file of the distribution.
+If you use PICI-CFDEMcoupling in a publication, please cite the following article (Open Access):
 
-## How to cite CFDEM®coupling-PUBLIC
-If you are using PhasicFlow in your research or industrial work, cite the following [article](https://doi.org/10.1016/j.partic.2012.05.002):
+> [Hanqiao Che](https://orcid.org/0000-0002-7479-3504), [Christopher R. K. Windows-Yule](https://orcid.org/0000-0003-1305-537X), [Catherine O'Sullivan](https://orcid.org/0000-0002-0935-1910), [Jonathan Seville](https://orcid.org/0000-0003-0207-3521) "**A novel semi-resolved CFD-DEM method with two-grid mapping: methodology and validation.**" AIChE Journal, 2023. DOI: [10.1002/aic.18321](https://doi.org/10.1002/aic.18321).
+
+```bibtex
+@article{che2024cfddem,
+  title={A novel semi-resolved CFD-DEM method with two-grid mapping: Methodology and verification},
+  author={Che, Hanqiao and Windows-Yule, Kit and O'Sullivan, Catherine and Seville, Jonathan},
+  journal={AIChE Journal},
+  volume={70},
+  number={2},
+  pages={e18321},
+  year={2024},
+  doi = {https://doi.org/10.1002/aic.18321}
+}
 ```
+
+AND
+
+> Christoph Goniva, Christoph Kloss, Niels G. Deen, Johannes A. M. Kuipers, Stefan Pirker "**Influence of rolling friction on single spout fluidized bed simulation.**" *Particuology*, 2012. DOI: [10.1016/j.partic.2012.05.002](https://doi.org/10.1016/j.partic.2012.05.002)
+
+```bibtex
 @article{goniva2012influence,
   title={Influence of rolling friction on single spout fluidized bed simulation},
   author={Goniva, Christoph and Kloss, Christoph and Deen, Niels G and Kuipers, Johannes AM and Pirker, Stefan},
@@ -92,3 +91,12 @@ If you are using PhasicFlow in your research or industrial work, cite the follow
   publisher={Elsevier}
 }
 ```
+
+Also, we ask that you "star" :star: this repository to help us gauge the level of interest in this project. Your star not only signifies your support but also assists us in tracking user engagement, a crucial factor for securing future grant funding. Your contribution in this regard is highly appreciated.
+
+## References:
+C. Zhang, C. Wu, K. Nandakumar, Effective Geometric Algorithms for Immersed Boundary Method Using Signed Distance Field, Journal of Fluids Engineering, 141 (2018). 
+
+T. Kempe, S. Schwarz, J. Fröhlich, Modelling of spheroidal particles in viscous flows,  Proceedings of the Academy Colloquium Immersed Boundary Methods: Current Status and Future Research Directions (KNAW, Amsterdam, The Netherlands, 15–17 June 2009), 2009.
+
+Zick, A., & Homsy, G.  Stokes flow through periodic arrays of spheres. Journal of Fluid Mechanics, 115(1982), 13-26. DOI: [10.1017/S0022112082000627](https://doi.org/10.1017/S0022112082000627).
